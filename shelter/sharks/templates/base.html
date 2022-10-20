@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    {% block meta %}{% endblock meta %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
@@ -12,6 +14,13 @@
         <a href="{% url 'sharks-home' %}">Home</a>
         <a href="{% url 'sharks-about' %}">About</a>
         <a href="{% url 'sharks-list' %}">Shark list</a>
+        {% if user.is_authenticated %}
+        <span>Hi, {{user}}</span>
+        <a href="{% url 'logout' %}">Log out</a>
+        {% else %}
+        <a href="{% url 'login' %}">Log in</a>
+        <a href="{% url 'register' %}">Register</a>
+        {% endif %}
     </nav>
     {% block heading %}{% endblock heading %}
     {% block content %}{% endblock content %}
